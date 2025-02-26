@@ -29,3 +29,46 @@ export const GetWorkSpace = query({
         return result;
     },
 });
+
+export const UpdateMessages=mutation({
+    args:{
+        workspaceId:v.id('workspace'),
+        messages:v.any()
+    },
+    handler:async(convexToJson,args)=>{
+        const result=await convexToJson.db.patch(args.workspaceId,{
+            messages:args.messages
+        });
+        return result
+    }
+})
+
+export const UpdateFiles=mutation({
+    args:{
+        workspaceId:v.id('workspace'),
+        files:v.any()
+    },
+    handler:async(convexToJson,args)=>{
+        const result=await convexToJson.db.patch(args.workspaceId,{
+            fileData:args.files
+        });
+        return result
+    }
+})
+
+export const GetAllWorkspace = query({
+    args: {
+      userId: v.optional(v.id("users")), // ✅ Allow `undefined` userId safely
+    },
+    handler: async (convexToJson, args) => {
+      if (!args.userId) return []; // ✅ Return an empty array if no userId is provided
+  
+      const result = await convexToJson.db
+        .query("workspace")
+        .filter((q) => q.eq(q.field("user"), args.userId))
+        .collect();
+  
+      return result;
+    },
+  });
+  

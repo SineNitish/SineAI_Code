@@ -8,28 +8,32 @@ import { GoogleOAuthProvider } from "@react-oauth/google";
 import { useConvex } from "convex/react";
 import { api } from "@/convex/_generated/api";
 
+import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
+import { AppSidebar } from "@/components/custom/AppSidebar";
+
 const Provider = ({ children }) => {
   const [messages, setMessages] = useState();
   const [userDetail, setUserDetail] = useState();
-  const convex=useConvex();
-  useEffect(()=>{
+  const convex = useConvex();
+  useEffect(() => {
     IsAutheicated();
-  },[])
-  const IsAutheicated= async()=>{
-    if(typeof window !== undefined)
-    {
-      const user = JSON.parse(localStorage.getItem('user'))
+  }, []);
+  const IsAutheicated = async () => {
+    if (typeof window !== undefined) {
+      const user = JSON.parse(localStorage.getItem("user"));
       //fetch from database
-      const result = await convex.query(api.users.GetUser,{
-        email:user?.email
-      })
+      const result = await convex.query(api.users.GetUser, {
+        email: user?.email,
+      });
       setUserDetail(result);
       console.log(result);
     }
-  }
+  };
   return (
     <div>
-      <GoogleOAuthProvider clientId={process.env.NEXT_PUBLIC_GOOGLE_AUTH_CLIENT_ID_KEY}>
+      <GoogleOAuthProvider
+        clientId={process.env.NEXT_PUBLIC_GOOGLE_AUTH_CLIENT_ID_KEY}
+      >
         <UserDetailContext.Provider value={{ userDetail, setUserDetail }}>
           <MessagesContext.Provider value={{ messages, setMessages }}>
             <NextThemesProvider
@@ -39,7 +43,13 @@ const Provider = ({ children }) => {
               disableTransitionOnChange
             >
               <Header />
-              {children}
+              <SidebarProvider defaultOpen={false} >
+                <AppSidebar/>
+                <main>
+                  <SidebarTrigger />
+                  {children}
+                </main>
+              </SidebarProvider>
             </NextThemesProvider>
           </MessagesContext.Provider>
         </UserDetailContext.Provider>
