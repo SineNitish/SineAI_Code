@@ -14,6 +14,12 @@ import ReactMarkdown from "react-markdown";
 
 import React, { useContext, useEffect, useState } from "react";
 import { useSidebar } from "../ui/sidebar";
+import { toast } from "sonner";
+
+
+export const countToken=(inputText)=>{
+  return inputText.trim().split(/\s+/).filter(word=>word).length;
+};
 
 const ChatView = () => {
   const { id } = useParams();
@@ -24,6 +30,7 @@ const ChatView = () => {
   const [loading, setLoading] = useState(false);
   const UpdateMessages = useMutation(api.workspace.UpdateMessages);
   const {toggleSiderbar}=useSidebar();
+  const UpdateTokens= useMutation(api.users.UpdateToken);
   useEffect(() => {
     if (id) {
       id && GetWorkspaceData();
@@ -63,14 +70,31 @@ const ChatView = () => {
       content: result.data.result,
     };
     setMessages((prev) => [...prev, aiResp]);
+
     await UpdateMessages({
       messages: [...messages, aiResp],
       workspaceId: id,
     });
+    
+    const token=Number(userDetail?.token)-Number(countToken(JSON.stringify(aiResp)));
+    setUserDetail(prev=>({
+      ...prev,
+      token:token
+    }))
+    //Update Tokens in Database
+    await UpdateTokens({
+      userId:userDetail?._id,
+      token:token      
+  });
     setLoading(false);
   };
 
   const onGenerate = (input) => {
+    if(userDetail?.token<10)
+    {
+        toast('You Dont have Enough tokens');
+        return ;
+    }
     setMessages((prev) => [
       ...prev,
       {

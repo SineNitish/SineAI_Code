@@ -14,6 +14,7 @@ export const CreateUser = mutation(
         picture,
         email,
         uid,
+        token: 50000,
       });
     }
   }
@@ -21,10 +22,27 @@ export const CreateUser = mutation(
 
 export const GetUser = query({
   args: {
-    email: v.string(),
+    email: v.optional(v.string()), // Make email optional
   },
   handler: async ({ db }, args) => {
+    if (!args.email) {
+      return null; // Return null if no email is provided
+    }
+    
     const user = await db.query("users").filter((q) => q.eq(q.field("email"), args.email)).collect();
     return user[0] || null;
   },
 });
+
+export const UpdateToken = mutation({
+  args: {
+    token: v.number(),
+    userId: v.id('users')
+  },
+  handler: async({ db }, args) => { // Fixed parameter name from convexToJson to the correct { db }
+    const result = await db.patch(args.userId, {
+      token: args.token
+    });
+    return result;
+  }
+})

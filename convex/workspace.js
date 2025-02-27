@@ -30,16 +30,21 @@ export const GetWorkSpace = query({
     },
 });
 
-export const UpdateMessages=mutation({
-    args:{
-        workspaceId:v.id('workspace'),
-        messages:v.any()
+export const UpdateMessages = mutation({
+    args: {
+        workspaceId: v.id('workspace'),
+        messages: v.array(
+            v.object({
+                content: v.string(),
+                role: v.string(),
+            })
+        )
     },
-    handler:async(convexToJson,args)=>{
-        const result=await convexToJson.db.patch(args.workspaceId,{
-            messages:args.messages
+    handler: async ({ db }, args) => {
+        const result = await db.patch(args.workspaceId, {
+            messages: args.messages
         });
-        return result
+        return result;
     }
 })
 
