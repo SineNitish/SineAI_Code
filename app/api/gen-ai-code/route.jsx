@@ -5,13 +5,13 @@ export async function POST(req) {
     try {
         console.log("🟢 Received API request");
 
-        // Ensure request body is valid JSON
+        // Read request body safely
         const rawBody = await req.text();
         console.log("📩 Raw Request Body:", rawBody);
 
         let prompt;
         try {
-            ({ prompt } = JSON.parse(rawBody)); // Safely parse JSON
+            ({ prompt } = JSON.parse(rawBody)); // Parse JSON safely
         } catch (jsonError) {
             console.error("❌ JSON Parsing Error:", jsonError);
             return NextResponse.json({ error: "Invalid JSON request" }, { status: 400 });
@@ -19,7 +19,7 @@ export async function POST(req) {
 
         console.log("🔹 Extracted prompt:", prompt);
 
-        // Send request to AI model
+        // Call AI model
         console.log("🚀 Sending request to GenAiCode...");
         const result = await GenAiCode.sendMessage(prompt);
         console.log("🟢 AI Model Response Received:", result);
@@ -33,18 +33,11 @@ export async function POST(req) {
         let resp = await result.response.text();
         console.log("📩 Raw AI Response:", resp);
 
-        // 🛠 FIX: Strip unwanted ```json formatting if present
-        resp = resp.trim();
-        if (resp.startsWith("```json")) {
-            resp = resp.replace(/```json/, "").trim(); // Remove leading ```json
-        }
-        if (resp.endsWith("```")) {
-            resp = resp.replace(/```$/, "").trim(); // Remove trailing ```
-        }
-
+        // ✅ FIX: Remove unnecessary ```json wrapping
+        resp = resp.replace(/^```json\s*|\s*```$/g, "").trim();
         console.log("🔄 Cleaned AI Response:", resp);
 
-        // Attempt to parse JSON response
+        // ✅ FIX: Ensure JSON format
         try {
             const jsonResponse = JSON.parse(resp);
             return NextResponse.json(jsonResponse);
@@ -58,3 +51,12 @@ export async function POST(req) {
         return NextResponse.json({ error: e.message || "Unknown error occurred" }, { status: 500 });
     }
 }
+
+// ✅ API CONFIGURATION (Add this at the bottom)
+export const config = {
+  api: {
+    responseLimit: "8mb", // Allow large AI responses
+    bodyParser: true, // Parse request body
+    externalResolver: true, // Prevent Next.js from timing out
+  },
+};
