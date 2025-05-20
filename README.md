@@ -20,7 +20,7 @@ Simply type your project idea or the component you want to build into the prompt
 
 Once you provide a prompt, SINE AI Code gets to work, utilizing powerful AI to understand your requirements and generate the necessary code files.
 
-![SINE AI Code - Generating Files](image_c4b46c.jpg)
+![SINE AI Code - Generating Files](screenshots/GeneratingFiles.jpg)
 
 ---
 
@@ -28,11 +28,11 @@ Once you provide a prompt, SINE AI Code gets to work, utilizing powerful AI to u
 
 After generation, you'll be presented with an intuitive interface showing the file structure and the generated code. You can review, edit, and see a live preview of your application.
 
-![SINE AI Code - Code View](image_c4bc31.png)
+![SINE AI Code - Code View](screenshots/CodeView.png)
 
 The live preview updates as you make changes, allowing for rapid iteration and development.
 
-![SINE AI Code - Preview](image_c4c38c.png)
+![SINE AI Code - Preview](screenshots/Preview.png)
 
 ---
 
