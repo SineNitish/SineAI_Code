@@ -98,4 +98,122 @@ SINECODE/
 ├── components/               # Reusable UI components
 │   ├── configs/
 │   ├── custom/               # Custom components (AppSidebar, ChatView, CodeView, etc.)
-│   └── ui/
+│   └── ui/                   # Shadcn/UI generated components
+├── context/                  # React Context API for state management
+│   ├── ActionContext.jsx
+│   ├── MessagesContext.jsx
+│   └── UserDetailContext.jsx
+├── convex/                   # Convex backend configuration and functions
+│   ├── _generated/           # Auto-generated Convex files
+│   ├── api.js
+│   ├── auth.config.js        # (Example: Convex auth configuration)
+│   ├── http.js               # (Example: Convex HTTP actions)
+│   ├── schema.js
+│   └── *.js                  # Other Convex functions (e.g., users.js, workspace.js)
+├── hooks/                    # Custom React hooks
+├── lib/                      # Utility functions and libraries
+├── public/                   # Static assets (images, fonts, etc.)
+│   ├── *.svg
+│   └── *.png
+├── .env.local                # Environment variables (Gitignored)
+├── next.config.mjs           # Next.js configuration
+├── package.json              # Project dependencies and scripts
+└── tailwind.config.js        # Tailwind CSS configuration
+```
+
+---
+
+## 🚀 Getting Started (For Local Development)
+
+This is a Next.js project bootstrapped with create-next-app.
+
+If you want to run this project locally or contribute:
+
+1. First, ensure you have Node.js (v18+ recommended) and npm/yarn/pnpm/bun installed.
+
+2. Clone the repository:
+   ```bash
+   git clone <your-repository-url>
+   cd SINECODE # Or your project's root folder name
+   ```
+
+3. Install dependencies:
+   ```bash
+   npm install
+   # or
+   yarn install
+   # or
+   pnpm install
+   # or
+   bun install
+   ```
+
+4. Set up Environment Variables:
+   Create a `.env.local` file in the root of the project with the following variables:
+   ```
+   # Next.js
+   NEXT_PUBLIC_APP_URL=https://www.google.com/search?q=http://localhost:3000
+
+   # Google Gemini API Key
+   NEXT_PUBLIC_GEMINI_API_KEY=YOUR_GEMINI_API_KEY
+
+   # Convex Configuration
+   NEXT_PUBLIC_CONVEX_URL=YOUR_CONVEX_DEPLOYMENT_URL
+
+   # Add other necessary environment variables (e.g., for auth if used)
+   ```
+   Refer to the Convex and Google Gemini API documentation for obtaining these keys/URLs.
+
+5. Run the Convex development server (if applicable for local backend testing):
+   You might need to run `npx convex dev` in a separate terminal if you're actively developing Convex functions.
+
+6. Run the Next.js development server:
+   ```bash
+   npm run dev
+   # or
+   yarn dev
+   # or
+   pnpm dev
+   # or
+   bun dev
+   ```
+
+7. Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+
+---
+
+## 📝 Learn More About Next.js
+
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- [Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+
+---
+
+## 🚀 Deploy on Vercel
+
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new) from the creators of Next.js. Ensure your environment variables (especially for Gemini API and Convex) are configured in your Vercel project settings.
+
+Check out the [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+
+---
+
+## 🙏 Acknowledgements
+
+- Project inspiration from tools like bolt.new.
+- Leverages the power of Google's Gemini API.
+- Utilizes CodeSandbox Sandpack for live previews.
+- Built with Convex for robust backend functionalities.
+- The amazing Next.js and React ecosystems.
+
+---
+
+## 📬 Contact & Developer
+
+- **Developer**: Nitish Sine
+- 📧 **Email**: sine.nitish@gmail.com
+- 🐙 **GitHub**: [github.com/SineNitish](https://github.com/SineNitish)
+- 🔗 **LinkedIn**: [linkedin.com/in/sine-nitish](https://linkedin.com/in/sine-nitish)
+- 🌐 **Project Link**: [https://sine-ai-code.vercel.app/](https://sine-ai-code.vercel.app/)
+
+✨ Interested in contributing, have questions, or want to connect? Feel free to reach out!
