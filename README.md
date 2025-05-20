@@ -20,7 +20,7 @@ Simply type your project idea or the component you want to build into the prompt
 
 Once you provide a prompt, SINE AI Code gets to work, utilizing powerful AI to understand your requirements and generate the necessary code files.
 
-![SINE AI Code - Generating Files](screenshots/GeneratingFiles.jpg)
+![SINE AI Code - Generating Files](screenshots/GeneratingFiles.png)
 
 ---
 
