@@ -12,7 +12,7 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 
 Simply type your project idea or the component you want to build into the prompt, and let SINE AI Code generate the initial codebase for you.
 
-![SINE AI Code - Prompt Screen](image_c4b165.png)
+![SINE AI Code - Prompt Screen](screenshots/PromptScreen.png)
 
 ---
 
