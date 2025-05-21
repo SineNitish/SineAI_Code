@@ -133,7 +133,7 @@ If you want to run this project locally or contribute:
 
 2. Clone the repository:
    ```bash
-   git clone <your-repository-url>
+   git clone git@github.com:SineNitish/SineAI_Code.git
    cd SINECODE # Or your project's root folder name
    ```
 
